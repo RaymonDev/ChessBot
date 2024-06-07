@@ -11,3 +11,15 @@ ChessBot is a powerful and intelligent bot designed to play chess on chess.com. 
 - **Advanced Chess Engine:** At the heart of ChessBot is StockFish, one of the strongest chess engines in the world. It analyzes the board, calculates the best moves, and executes strategic gameplay.
 
 
+## Prerequisites
+- **Python:** Make sure you have Python installed on your system. 
+- Install the requirements:
+  ```
+  pip install -r requirements.txt
+  ```
+  
+## Contributing
+Contributions are welcome! Please fork the repository and submit a pull request with your changes. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+This project is licensed under the MIT License.

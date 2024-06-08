@@ -12,7 +12,9 @@ import time
 import chess.engine
 
 from playsound import playsound
-sound_file = "./media/error.wav"
+
+err_sound_file = "./media/error.wav"
+pop_sound_file = "./media/pop.wav"
 
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -23,7 +25,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 ############################################ Selenium Config ############################################
 
 profile = webdriver.FirefoxProfile(
-    r'C:\Users\Propietario\AppData\Roaming\Mozilla\Firefox\Profiles\owqvk9vn.default-release-1709495205583')
+    r'route to firefox profile')
 
 profile.set_preference("dom.webdriver.enabled", False)
 profile.set_preference('useAutomationExtension', False)
@@ -54,28 +56,34 @@ print("Please login to your account and open a game in chess.com")
 print("Make sure you have the movements in text and not in symbols")
 print("Make sure your language is English")
 print("-"*20)
-playsound(sound_file)
+playsound(pop_sound_file)
 
 
 
 enemyColor = input("\nEnter your enemy color (w/b): ")
+stockFishElo = input("Enter the desired elo of AI engine (m = max & min = 1320): ")
 
 
+# Configure the engine to limit its strength if a specific elo is provided
+if stockFishElo != "m":
+    engine.configure({"UCI_LimitStrength": True, "UCI_Elo": int(stockFishElo)})
+    print(f"\033[94m[BOT INFO] AI engine elo set to {stockFishElo}\033[0m")
+else:
+    engine.configure({"UCI_LimitStrength": False})
+    print("\033[94m[BOT INFO] AI engine elo set to max\033[0m")
+
+# Define the color of the player
 if enemyColor == "w":
     player_color = chess.WHITE
     #par = True
     flip_flag = True
     
-    print("Enemy color / Your color with AI : White ")
-    
-    
-    
-    
+    print("\033[94m[BOT INFO] Enemy color / Your color with AI : White \033[0m")
 else:
     player_color = chess.BLACK
     #par = False
     flip_flag = False
-    print("Enemy color / Your color with AI : Black ")
+    print("\033[94m[BOT INFO] Enemy color / Your color with AI : Black \033[0m")
 
 
 # Define the list of data-node values to search for
@@ -92,6 +100,7 @@ detected_elements = []
 import numpy as np
 import pyautogui
 import time
+import keyboard
 
 
 distFactor = 95
@@ -195,7 +204,7 @@ try:
                             board.push(move_obj)
                         except ValueError as ve:
                             print(f"\033[91mError parsing move: {move}. Exception: {ve}\033[0m")
-                            playsound(sound_file)
+                            playsound(err_sound_file)
 
                             print(board)
     
@@ -217,7 +226,7 @@ try:
             except Exception as e:
                 # If there's any exception, print it out
                 print(f"Exception encountered: {e}")
-                playsound(sound_file)
+                playsound(err_sound_file)
                 continue
         # Wait for a very short period before checking again
         time.sleep(0.01)
@@ -228,7 +237,7 @@ try:
 except KeyboardInterrupt:
     # Exit the loop if interrupted by the user
     print("Script terminated by user.")
-    playsound(sound_file)
+    playsound(err_sound_file)
 finally:
     # Clean up and close the browser
     driver.quit()

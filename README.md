@@ -19,5 +19,9 @@ ChessBot is a powerful and intelligent bot designed to play chess on chess.com. 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your changes. For major changes, please open an issue first to discuss what you would like to change.
 
+## Disclaimer
+Please note that the use of bots on chess.com is prohibited by the site's terms of service. This project is intended for educational purposes only and should not be used to violate chess.com's policies.
+
+
 ## License
 This project is licensed under the MIT License.
